@@ -1,5 +1,10 @@
 package studios.lessontwo;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -7,12 +12,9 @@ import java.util.Scanner;
 public class CharacterCounter {
 
     public static void main(String[] args) {
-        Scanner in = new Scanner(System.in);
-        String line = in.nextLine();
+        String fileText = readFileAsString();
         Integer count = 0;
-        in.close();
-
-        char[] charactersInString = line.toCharArray();
+        char[] charactersInString = fileText.toCharArray();
         Map<String, Integer> charMap = new HashMap<String, Integer>();
         for(Character c: charactersInString) {
             String lowerChar = c.toString().toLowerCase();
@@ -32,5 +34,15 @@ public class CharacterCounter {
             System.out.println(letters.getKey() + ": " + letters.getValue());
         }
 
+    }
+
+    public static String readFileAsString() {
+        String text = "";
+        try {
+            text = new String(Files.readAllBytes(Paths.get("/home/james/IdeaProjects/java-web-dev-exercises/src/studios/lessontwo/file.txt")));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return text;
     }
 }
