@@ -13,14 +13,15 @@ public class CharacterCounter {
         in.close();
 
         char[] charactersInString = line.toCharArray();
-        Map<Character, Integer> charMap = new HashMap<Character, Integer>();
-        for(char c: charactersInString) {
-            if (charMap.containsKey(c)) {
-                count = charMap.get(c);
+        Map<String, Integer> charMap = new HashMap<String, Integer>();
+        for(Character c: charactersInString) {
+            String lowerChar = c.toString().toLowerCase();
+            if (charMap.containsKey(lowerChar)) {
+                count = charMap.get(lowerChar);
                 count++;
-                charMap.replace(c, count);
+                charMap.replace(lowerChar, count);
             } else {
-                charMap.put(c, 1);
+                charMap.put(lowerChar, 1);
             }
         }
 
