@@ -16,12 +16,15 @@ public class CharacterCounter {
         Map<String, Integer> charMap = new HashMap<String, Integer>();
         for(Character c: charactersInString) {
             String lowerChar = c.toString().toLowerCase();
-            if (charMap.containsKey(lowerChar)) {
-                count = charMap.get(lowerChar);
-                count++;
-                charMap.replace(lowerChar, count);
-            } else {
-                charMap.put(lowerChar, 1);
+            lowerChar = lowerChar.replaceAll("[^a-z]", "");
+            if (!lowerChar.equals("")) {
+                if (charMap.containsKey(lowerChar)) {
+                    count = charMap.get(lowerChar);
+                    count++;
+                    charMap.replace(lowerChar, count);
+                } else {
+                    charMap.put(lowerChar, 1);
+                }
             }
         }
 
